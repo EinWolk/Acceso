@@ -1,14 +1,14 @@
-/*
+
+
+/**
+ *
+ * @author Alejandro
+ *//*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package Interfaz;
-
-/**
- *
- * @author Alejandro
- */
 public class Inter extends javax.swing.JFrame {
 
     /**
@@ -17,7 +17,9 @@ public class Inter extends javax.swing.JFrame {
     public Inter() {
         initComponents();
     }
-
+public void metodo(){
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
