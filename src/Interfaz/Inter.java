@@ -1,5 +1,3 @@
-
-
 /**
  *
  * @author Alejandro
@@ -9,17 +7,27 @@
  * and open the template in the editor.
  */
 package Interfaz;
+
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Inter extends javax.swing.JFrame {
+
+    public static Conexion conn = new Conexion();
 
     /**
      * Creates new form Inter
      */
     public Inter() {
         initComponents();
+        jLabel5.setVisible(false);
+        jLabel4.setVisible(false);
     }
-public void metodo(){
-    
-}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,6 +85,11 @@ public void metodo(){
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
+            }
+        });
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField4KeyPressed(evt);
             }
         });
 
@@ -173,6 +186,36 @@ public void metodo(){
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            mostrarAlumno(jTextField4.getText());
+        }
+    }//GEN-LAST:event_jTextField4KeyPressed
+    private void mostrarAlumno(String matricula) {
+        String query = "SELECT * FROM alumno WHERE matricula = '" + matricula + "'";
+        Statement st;
+        try {
+            st = conn.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                jTextField1.setText(rs.getString(3));
+                jTextField2.setText(rs.getString(4));
+                jTextField3.setText(rs.getString(5));
+                if (rs.getInt(6) == 1) {
+                    jLabel5.setVisible(false);
+                    jLabel4.setVisible(true);
+                } else {
+                    jLabel5.setVisible(true);
+                    jLabel4.setVisible(false);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Inter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jTextField4.setText("");
+    }
 
     /**
      * @param args the command line arguments

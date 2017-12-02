@@ -11,7 +11,7 @@ public class Conexion {
     private static Connection conn;
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String user = "root";
-    private static final String password = "";
+    private static final String password = "root";
     private static final String db = "ugmex";
     private static final String url = "jdbc:mysql://localhost:3306/"+db;
 
@@ -31,6 +31,7 @@ public class Conexion {
             conn = DriverManager.getConnection(url, user, password);
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             Icon bd;
             bd = new ImageIcon("src/img/database (1).png");
             JOptionPane.showMessageDialog(null, "Error al conectar a la base de datos", "Error", JOptionPane.WARNING_MESSAGE, bd);
